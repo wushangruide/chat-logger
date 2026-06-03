@@ -1,0 +1,30 @@
+{
+  "name": "chat-logger",
+  "id": "chat-logger",
+  "owner": {
+    "name": "wushangruide"
+  },
+  "metadata": {
+    "description": "Automatically log Claude Code conversations to a per-project chat-log.md file via stop hooks",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "chat-logger",
+      "source": "./",
+      "description": "Automatically log Claude Code conversations (user messages, Claude replies, tool calls) to a per-project chat-log.md file via stop hooks",
+      "version": "1.0.0",
+      "author": {
+        "name": "Wu"
+      },
+      "keywords": [
+        "logging",
+        "chat",
+        "history",
+        "transcript",
+        "markdown"
+      ],
+      "category": "workflow"
+    }
+  ]
+}
