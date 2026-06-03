@@ -1,0 +1,19 @@
+{
+  "name": "chat-logger",
+  "version": "1.0.0",
+  "description": "Automatically log Claude Code conversations to a per-project chat-log.md file via stop hooks",
+  "author": {
+    "name": "Wu",
+    "email": ""
+  },
+  "homepage": "https://github.com/wushangruide/chat-logger",
+  "repository": "https://github.com/wushangruide/chat-logger",
+  "license": "MIT",
+  "keywords": [
+    "logging",
+    "chat",
+    "history",
+    "transcript",
+    "markdown"
+  ]
+}
