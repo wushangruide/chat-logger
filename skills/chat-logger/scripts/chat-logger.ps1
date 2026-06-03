@@ -31,7 +31,7 @@ $userMessage = ""
 $toolNames = @()
 
 if (Test-Path $transcriptPath) {
-    $lines = Get-Content -Path $transcriptPath -Encoding UTF8 -Tail 200
+    $lines = Get-Content -Path $transcriptPath -Encoding UTF8 -Tail 2000
     for ($i = $lines.Count - 1; $i -ge 0; $i--) {
         try {
             $entry = $lines[$i] | ConvertFrom-Json
@@ -74,10 +74,10 @@ $md = @"
 
 ## $timeStr
 
-**用户：**
+**User:**
 $userMessage
 
-**Claude：**
+**Claude:**
 $claudeResponse
 
 "@
@@ -86,7 +86,7 @@ if ($toolNames.Count -gt 0) {
     $toolList = ($toolNames | Select-Object -Unique) -join ", "
     $md += @"
 
-> 🔧 工具调用：$toolList
+> Tools: $toolList
 
 "@
 }
@@ -99,11 +99,13 @@ $md += @"
 
 # Write to log file
 try {
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
     if (-not (Test-Path $logFile)) {
         $projectName = Split-Path $cwd -Leaf
-        "# Chat Log -- $projectName`n" | Out-File -FilePath $logFile -Encoding utf8 -NoNewline
+        $header = "# Chat Log -- $projectName`n`n"
+        [System.IO.File]::WriteAllText($logFile, $header, $utf8NoBom)
     }
-    $md | Out-File -FilePath $logFile -Encoding utf8 -Append
+    [System.IO.File]::AppendAllText($logFile, $md, $utf8NoBom)
 } catch {
     Write-Warning "chat-logger: failed to write log: $_"
 }

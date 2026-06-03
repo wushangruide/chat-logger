@@ -41,13 +41,13 @@ On Windows, the command is `powershell -ExecutionPolicy Bypass -File ".claude/sc
 
 ## 2026-06-03 14:30
 
-**用户：**
+**User:**
 <user message>
 
-**Claude：**
+**Claude:**
 <claude response text>
 
-> 🔧 工具调用：Read, Edit, Bash
+> Tools: Read, Edit, Bash
 
 ---
 ```

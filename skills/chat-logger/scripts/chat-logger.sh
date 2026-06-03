@@ -27,7 +27,7 @@ USER_MSG=""
 TOOL_NAMES=""
 
 if [ -f "$TRANSCRIPT" ]; then
-  LINES=$(tail -200 "$TRANSCRIPT")
+  LINES=$(tail -2000 "$TRANSCRIPT")
   USER_MSG=$(echo "$LINES" | while IFS= read -r line; do
     type=$(echo "$line" | jq -r '.type // ""' 2>/dev/null)
     if [ "$type" = "user" ]; then
@@ -57,11 +57,11 @@ TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
 
 # Build markdown block
 MD=$'\n'"## $TIMESTAMP"$'\n\n'
-MD+="**用户：**"$'\n'"$USER_MSG"$'\n\n'
-MD+="**Claude：**"$'\n'"$LAST_MSG"$'\n'
+MD+="**User:**"$'\n'"$USER_MSG"$'\n\n'
+MD+="**Claude:**"$'\n'"$LAST_MSG"$'\n'
 
 if [ -n "$TOOL_NAMES" ]; then
-  MD+=$'\n'"> 🔧 工具调用：$TOOL_NAMES"$'\n'
+  MD+=$'\n'"> Tools: $TOOL_NAMES"$'\n'
 fi
 
 MD+=$'\n'"---"$'\n'
